@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#TODO: add up traffic from ethernet and wifi
+WIRELESS_INTERFACE=wlp3s0
+ETHERNET_INTERFACE=enp
+
+DOWN_STATUS=$(ifconfig $WIRELESS_INTERFACE | awk -F"()" '/RX packets/ {print $1 }' | grep -oP '\(\K[^\)]+')
+UP_STATUS=$(ifconfig $WIRELESS_INTERFACE | awk -F"()" '/TX packets/ {print $1 }' | grep -oP '\(\K[^\)]+')
+echo "⇄ $DOWN_STATUS/$UP_STATUS"

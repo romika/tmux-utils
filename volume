@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+ICON=""
+status=$(amixer sget Master | grep 'dB')
+if [[ $status = *"[off]"* ]]; then
+	ICON="✕"
+fi
+VOLUME_STATUS=$(amixer sget Master | awk -F"[][]" '/dB/ { print $2 }'| tail -1)
+echo "♫$ICON $VOLUME_STATUS"

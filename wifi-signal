@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+WIFI_ICON="x"
+ETHERNET_ICON=""
+WIFI_STATUS=""
+
+WIFI_RUNNING=$(ifconfig | awk -F "()" '/wlp3s0/ {print $1}')
+ETHERNET_RUNNING=$(ifconfig | awk -F "()" '/enp0s25/ {print $1}')
+
+if [[ $WIFI_RUNNING = *RUNNING* ]]; then
+	WIFI_ICON="☄"
+	WIFI_STATUS=$(cat /proc/net/wireless | awk 'NR==3 {print $3}'| sed s/.[^.]*$//)%
+fi
+if [[ $ETHERNET_RUNNING = *RUNNING* ]]; then
+	ETHERNET_ICON="⟂"
+fi
+echo "$ETHERNET_ICON$WIFI_ICON $WIFI_STATUS"
+
+

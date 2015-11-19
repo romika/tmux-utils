@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#PROCESSOR_STATUS=$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input | colrm 3)
+
+PROCESSOR_STATUS=$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input | colrm 3)
+
+
+#PROCESSOR_STATUS=$(cat /sys/class/hwmon/hwmon1/temp1_input | colrm 3)
+
+if [[ $PROCESSOR_STATUS = "" ]]; then
+	PROCESSOR_STATUS="N/A"
+else
+	PROCESSOR_STATUS=$PROCESSOR_STATUS°
+fi
+echo "▦ $PROCESSOR_STATUS"

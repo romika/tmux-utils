@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+RAM=`free | grep Speicher | awk '{print int($3/$2 * 100)}'`
+
+echo "⊟ $RAM%"
+
